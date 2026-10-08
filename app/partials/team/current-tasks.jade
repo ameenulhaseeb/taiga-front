@@ -1,0 +1,106 @@
+//- This source code is licensed under the terms of the
+//- GNU Affero General Public License found in the LICENSE file in
+//- the root directory of this source tree.
+//-
+//- Copyright (c) 2021-present Kaleidos INC
+
+tg-project-archived-warning
+.wrapper(ng-controller="TeamCurrentTasksController as vm", ng-init="section='team'")
+    tg-project-menu
+    section.main.team-current-tasks
+        header.current-tasks-heading
+            div
+                h1(translate="TEAM.CURRENT_TASKS.TITLE")
+                p(translate="TEAM.CURRENT_TASKS.SUBTITLE")
+            a.current-tasks-team-link(tg-nav="project-team:project=project.slug", translate="TEAM.CURRENT_TASKS.TEAM_STATS")
+        .current-tasks-summary(ng-if="!vm.loading && !vm.error")
+            .current-tasks-stat.members
+                tg-svg(svg-icon="icon-team")
+                div
+                    span(translate="TEAM.CURRENT_TASKS.MEMBERS")
+                    strong {{vm.summary.members}}
+            .current-tasks-stat.progress
+                tg-svg(svg-icon="icon-task")
+                div
+                    span(translate="TEAM.CURRENT_TASKS.PROGRESS")
+                    strong {{vm.summary.progress}}
+            .current-tasks-stat.blocked
+                tg-svg(svg-icon="icon-exclamation")
+                div
+                    span(translate="TEAM.CURRENT_TASKS.BLOCKED")
+                    strong {{vm.summary.blocked}}
+            .current-tasks-stat.completed
+                tg-svg(svg-icon="icon-check")
+                div
+                    span(translate="TEAM.CURRENT_TASKS.COMPLETED")
+                    strong {{vm.summary.completed}}
+        form.current-tasks-filters(ng-submit="vm.applyFilters()", ng-if="!vm.loading && !vm.error")
+            label.current-tasks-search
+                span.sr-only(translate="TEAM.CURRENT_TASKS.SEARCH")
+                tg-svg(svg-icon="icon-search")
+                input(type="search", ng-model="vm.filters.query", ng-change="vm.applyFilters()", placeholder="{{'TEAM.CURRENT_TASKS.SEARCH' | translate}}")
+            label
+                span.sr-only(translate="TEAM.CURRENT_TASKS.PROJECT")
+                select(ng-model="vm.filters.project", ng-change="vm.applyFilters()", ng-options="p.id as p.name for p in vm.projects")
+                    option(value="", translate="TEAM.CURRENT_TASKS.ALL_PROJECTS")
+            label
+                span.sr-only(translate="TEAM.CURRENT_TASKS.ROLE")
+                select(ng-model="vm.filters.role", ng-change="vm.applyFilters()", ng-options="role.id as role.name for role in vm.roles")
+                    option(value="", translate="TEAM.CURRENT_TASKS.ALL_ROLES")
+            label
+                span.sr-only(translate="TEAM.CURRENT_TASKS.STATUS")
+                select(ng-model="vm.filters.status", ng-change="vm.applyFilters()", ng-options="status for status in vm.statuses")
+                    option(value="", translate="TEAM.CURRENT_TASKS.ALL_STATUS")
+            label
+                span.sr-only(translate="TEAM.CURRENT_TASKS.SPRINT")
+                select(ng-model="vm.filters.sprint", ng-change="vm.applyFilters()", ng-options="sprint.key as sprint.name for sprint in vm.sprints")
+                    option(value="", translate="TEAM.CURRENT_TASKS.ALL_SPRINTS")
+        p.current-tasks-message(role="status", ng-if="vm.loading", translate="TEAM.CURRENT_TASKS.LOADING")
+        .current-tasks-message(role="alert", ng-if="vm.error")
+            p(translate="TEAM.CURRENT_TASKS.ERROR")
+            button.btn-small(type="button", ng-click="vm.load()", translate="TEAM.CURRENT_TASKS.RETRY")
+        .current-tasks-table-wrap(ng-if="!vm.loading && !vm.error")
+            table.current-tasks-table
+                caption.sr-only(translate="TEAM.CURRENT_TASKS.TITLE")
+                thead
+                    tr
+                        th(scope="col", translate="TEAM.CURRENT_TASKS.MEMBER")
+                        th(scope="col", translate="TEAM.CURRENT_TASKS.PROJECT")
+                        th(scope="col", translate="TEAM.CURRENT_TASKS.TASK")
+                        th(scope="col", translate="TEAM.CURRENT_TASKS.STATUS")
+                        th(scope="col", translate="TEAM.CURRENT_TASKS.PRIORITY")
+                        th(scope="col", translate="TEAM.CURRENT_TASKS.SPRINT")
+                        th(scope="col", translate="TEAM.CURRENT_TASKS.DUE")
+                        th(scope="col", translate="TEAM.CURRENT_TASKS.ACTIONS")
+                tbody
+                    tr(ng-repeat="row in vm.visibleRows track by row.key")
+                        td
+                            .current-tasks-member
+                                img(tg-avatar="row.member", alt="")
+                                div
+                                    strong {{row.member.full_name_display || row.member.full_name || row.member.username}}
+                                    small {{row.role}}
+                        td
+                            span.current-tasks-project {{row.project.name}}
+                        td.current-tasks-subject
+                            a(ng-if="row.url", ng-href="{{row.url}}") {{row.item.subject}}
+                            span(ng-if="!row.url", translate="TEAM.CURRENT_TASKS.IDLE")
+                            .current-tasks-meta(ng-if="row.url")
+                                span \#{{row.item.ref}}
+                                span.current-tasks-type {{(row.type === 'task' ? 'TEAM.CURRENT_TASKS.TYPE_TASK' : 'TEAM.CURRENT_TASKS.TYPE_STORY') | translate}}
+                            small(ng-if="row.item.description") {{row.item.description | limitTo:100}}
+                        td
+                            span.current-tasks-status(ng-class="row.state")
+                                span.current-tasks-dot(aria-hidden="true")
+                                span {{row.item.is_blocked ? ('TEAM.CURRENT_TASKS.BLOCKED_STATUS' | translate) : row.status}}
+                        td {{row.item.priority_extra_info.name || '—'}}
+                        td
+                            strong {{row.sprint.name || '—'}}
+                            small(ng-if="row.sprint") {{row.sprint.estimated_start | date:'MMM d'}} – {{row.sprint.estimated_finish | date:'MMM d'}}
+                        td {{row.item.due_date ? (row.item.due_date | date:'MMM d, yyyy') : '—'}}
+                        td
+                            a.current-tasks-open(ng-if="row.url", ng-href="{{row.url}}", aria-label="{{('TEAM.CURRENT_TASKS.OPEN' | translate) + ': ' + row.item.subject}}")
+                                tg-svg(svg-icon="icon-arrow-right")
+                    tr(ng-if="!vm.visibleRows.length")
+                        td.current-tasks-message(colspan="8", translate="TEAM.CURRENT_TASKS.EMPTY")
+        p.current-tasks-note(ng-if="!vm.loading && !vm.error", translate="TEAM.CURRENT_TASKS.NOTE")

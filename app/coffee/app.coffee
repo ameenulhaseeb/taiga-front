@@ -295,6 +295,14 @@ configure = ($routeProvider, $locationProvider, $httpProvider, $provide, $tgEven
         }
     )
 
+    $routeProvider.when("/project/:pslug/team/current-tasks",
+        {
+            templateUrl: "team/current-tasks.html",
+            loader: true,
+            section: "team"
+        }
+    )
+
     # Issues
     $routeProvider.when("/project/:pslug/issues",
         {

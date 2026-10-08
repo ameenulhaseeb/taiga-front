@@ -78,6 +78,7 @@ urls = {
     "project-wiki-page": "/project/:project/wiki/:slug"
 
     # Team
+    "project-team-current-tasks": "/project/:project/team/current-tasks"
     "project-team": "/project/:project/team"
 
     # Admin
