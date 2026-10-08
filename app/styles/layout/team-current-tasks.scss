@@ -1,0 +1,258 @@
+.team-current-tasks {
+    background: rgba(250, 252, 255, 1);
+    color: rgba(25, 41, 61, 1);
+    min-width: 0;
+    padding: 1.5rem;
+
+    .sr-only {
+        clip: rect(0, 0, 0, 0);
+        height: 1px;
+        overflow: hidden;
+        position: absolute;
+        width: 1px;
+    }
+    .current-tasks-heading {
+        align-items: center;
+        display: flex;
+        gap: 1rem;
+        justify-content: space-between;
+        margin-bottom: 1.25rem;
+    }
+    h1 {
+        color: inherit;
+        font-size: 2rem;
+        margin: 0 0 .35rem;
+    }
+    p {
+        color: rgba(98, 113, 136, 1);
+        margin: 0;
+    }
+    .current-tasks-team-link {
+        white-space: nowrap;
+    }
+    .current-tasks-summary {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        margin-bottom: 1rem;
+    }
+    .current-tasks-stat {
+        align-items: center;
+        background: rgba(242, 248, 255, 1);
+        border: 1px solid rgba(216, 229, 247, 1);
+        border-radius: .4rem;
+        color: rgba(0, 111, 237, 1);
+        display: flex;
+        gap: .9rem;
+        padding: 1rem;
+    }
+    .current-tasks-stat tg-svg {
+        background: rgba(225, 239, 255, 1);
+        border-radius: 50%;
+        fill: currentColor;
+        flex-shrink: 0;
+        height: 2.75rem;
+        padding: .65rem;
+        width: 2.75rem;
+    }
+    .current-tasks-stat span {
+        font-size: .875rem;
+    }
+    .current-tasks-stat strong {
+        color: rgba(25, 41, 61, 1);
+        display: block;
+        font-size: 1.65rem;
+        margin-top: .35rem;
+    }
+    .progress {
+        background: rgba(243, 253, 248, 1);
+        border-color: rgba(215, 243, 229, 1);
+        color: rgba(0, 147, 68, 1);
+    }
+    .blocked {
+        background: rgba(255, 247, 240, 1);
+        border-color: rgba(255, 228, 209, 1);
+        color: rgba(184, 73, 0, 1);
+    }
+    .completed {
+        background: rgba(249, 245, 255, 1);
+        border-color: rgba(231, 219, 255, 1);
+        color: rgba(113, 47, 211, 1);
+    }
+    .current-tasks-filters {
+        display: grid;
+        gap: .75rem;
+        grid-template-columns: 2fr repeat(4, minmax(0, 1fr));
+        margin-bottom: 1rem;
+    }
+    .current-tasks-filters label {
+        margin: 0;
+        min-width: 0;
+    }
+    .current-tasks-filters input,
+    .current-tasks-filters select {
+        background: rgba(255, 255, 255, 1);
+        border: 1px solid rgba(220, 226, 236, 1);
+        border-radius: .35rem;
+        color: inherit;
+        height: 2.75rem;
+        margin: 0;
+        width: 100%;
+    }
+    .current-tasks-search {
+        position: relative;
+    }
+    .current-tasks-search input {
+        padding-left: 2.7rem;
+    }
+    .current-tasks-search tg-svg {
+        fill: rgba(98, 113, 136, 1);
+        height: 1.2rem;
+        left: .85rem;
+        position: absolute;
+        top: .75rem;
+        width: 1.2rem;
+    }
+    .current-tasks-table-wrap {
+        background: rgba(255, 255, 255, 1);
+        border: 1px solid rgba(228, 233, 241, 1);
+        border-radius: .45rem;
+        overflow-x: auto;
+    }
+    .current-tasks-table {
+        border-collapse: collapse;
+        font-size: .875rem;
+        min-width: 1080px;
+        width: 100%;
+    }
+    .current-tasks-table th {
+        background: rgba(241, 243, 247, 1);
+        font-weight: 500;
+        padding: .8rem 1rem;
+        text-align: left;
+        white-space: nowrap;
+    }
+    .current-tasks-table td {
+        border-top: 1px solid rgba(234, 238, 245, 1);
+        padding: .85rem 1rem;
+        vertical-align: middle;
+    }
+    .current-tasks-table tbody tr:hover {
+        background: rgba(250, 252, 255, 1);
+    }
+    .current-tasks-table small {
+        color: rgba(98, 113, 136, 1);
+        display: block;
+        font-size: .8rem;
+        margin-top: .35rem;
+    }
+    .current-tasks-member {
+        align-items: center;
+        display: flex;
+        gap: .8rem;
+        min-width: 180px;
+    }
+    .current-tasks-member img {
+        border-radius: 50%;
+        height: 3rem;
+        width: 3rem;
+    }
+    .current-tasks-subject {
+        min-width: 270px;
+    }
+    .current-tasks-subject a {
+        color: inherit;
+        font-weight: 600;
+    }
+    .current-tasks-meta {
+        align-items: center;
+        color: rgba(98, 113, 136, 1);
+        display: flex;
+        gap: .6rem;
+        margin-top: .35rem;
+    }
+    .current-tasks-project,
+    .current-tasks-type {
+        background: rgba(242, 234, 255, 1);
+        border-radius: .4rem;
+        color: rgba(111, 47, 202, 1);
+        display: inline-block;
+        padding: .3rem .7rem;
+    }
+    .current-tasks-type {
+        background: rgba(231, 242, 255, 1);
+        color: rgba(0, 103, 225, 1);
+        padding: .15rem .5rem;
+    }
+    .current-tasks-status {
+        align-items: center;
+        background: rgba(239, 242, 246, 1);
+        border-radius: 1rem;
+        display: inline-flex;
+        font-size: .8rem;
+        gap: .4rem;
+        padding: .4rem .7rem;
+        white-space: nowrap;
+    }
+    .current-tasks-status.progress {
+        background: rgba(223, 248, 233, 1);
+    }
+    .current-tasks-status.blocked {
+        background: rgba(255, 236, 222, 1);
+    }
+    .current-tasks-status.completed {
+        background: rgba(241, 231, 255, 1);
+    }
+    .current-tasks-dot {
+        background: currentColor;
+        border-radius: 50%;
+        height: .6rem;
+        width: .6rem;
+    }
+    .current-tasks-open tg-svg {
+        fill: rgba(98, 113, 136, 1);
+        height: 1.2rem;
+        width: 1.2rem;
+    }
+    .current-tasks-message {
+        padding: 2rem;
+        text-align: center;
+    }
+    .current-tasks-note {
+        font-size: .8rem;
+        line-height: 1.5;
+        margin-top: 1rem;
+    }
+    a:focus,
+    button:focus,
+    input:focus,
+    select:focus {
+        outline: 2px solid rgba(0, 111, 237, 1);
+        outline-offset: 2px;
+    }
+    @media (max-width: 1100px) {
+        .current-tasks-summary {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        .current-tasks-filters {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        .current-tasks-search {
+            grid-column: 1 / -1;
+        }
+    }
+    @media (max-width: 600px) {
+        padding: 1rem;
+        .current-tasks-heading {
+            align-items: flex-start;
+            flex-direction: column;
+        }
+        h1 {
+            font-size: 1.5rem;
+        }
+        .current-tasks-summary,
+        .current-tasks-filters {
+            grid-template-columns: minmax(0, 1fr);
+        }
+    }
+}

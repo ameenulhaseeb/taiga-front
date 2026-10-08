@@ -13,5 +13,6 @@ div.wrapper(ng-controller="TeamController as ctrl", ng-init="section='team'")
     sidebar.menu-secondary
         include ../includes/modules/team/team-filters
     section.main.team
+        a.btn-small(tg-nav="project-team-current-tasks:project=project.slug", translate="TEAM.CURRENT_TASKS.TITLE")
         include ../includes/components/mainTitle
         include ../includes/modules/team/team-table
