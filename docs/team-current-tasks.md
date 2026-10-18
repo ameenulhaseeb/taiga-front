@@ -82,3 +82,15 @@ Frontend tests are in `app/coffee/modules/team/current-tasks.spec.coffee` and ru
 Frontend: `app/coffee/modules/team/current-tasks.coffee`, its `.spec.coffee`, `app/partials/team/current-tasks.jade`, `app/styles/layout/team-current-tasks.scss`, route/resource/nav registrations and locale strings.
 
 Backend: `taiga/projects/current_tasks.py` (authorized ORM adapter), `taiga/projects/current_tasks_data.py` (filtering and projection), ProjectViewSet action/permission, unit and integration tests.
+
+## Applying the supplied source package
+
+The source package includes complete frontend/backend trees and patches against each repository's `main` base. GitHub allowed the frontend branch but denied backend branch creation (403). If `taiga-back` has no remote feature branch, create it locally from the documented base and apply `patches/taiga-back.patch` from the package:
+
+```bash
+git switch -c feature/team-standup-dashboard
+git apply --check /path/to/patches/taiga-back.patch
+git apply /path/to/patches/taiga-back.patch
+```
+
+Validation completed: 10 backend projection tests, 7 frontend controller tests, 6 native Django endpoint integration tests using embedded PostgreSQL with schema synchronization, Django system check, route registration, CoffeeScript/Jade/SCSS compilation and stylesheet lint. Browser checks rendered the actual template with a projection-backed fixture and covered lead/search/reset filters, photos, overdue rows, multiple assignments, idle-last ordering and mobile overflow. The full production frontend build, migration replay and live deployment/database verification remain pending.
