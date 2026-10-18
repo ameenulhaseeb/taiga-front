@@ -57,6 +57,7 @@ urls = {
     "resolver": "/resolver"
 
     # Project
+    "project-current-tasks": "/projects/%s/current_tasks"
     "projects": "/projects"
     "project-templates": "/project-templates"
     "project-modules": "/projects/%s/modules"
